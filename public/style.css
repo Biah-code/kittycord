@@ -1,0 +1,1273 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Quicksand", "Fredoka", "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff0f5;
+    color: #5c2a3a;
+    overflow: hidden;
+}
+
+.discord-app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: #fff5f8;
+    overflow: hidden;
+}
+
+/* ==========================================
+   COLUNA 1: BARRA LATERAL ESTILO SANRIO
+   ========================================== */
+.server-rail {
+    width: 74px;
+    background: linear-gradient(180deg, #ff7aa8 0%, #ff528e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    gap: 10px;
+    border-right: 2px solid #ffc2d6;
+    flex-shrink: 0;
+}
+
+.rail-usuarios-lista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    padding: 4px 0;
+}
+
+.rail-usuarios-lista::-webkit-scrollbar {
+    width: 0px;
+}
+
+.rail-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.rail-item {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #ff2e63;
+    border: 2px solid #ffd6e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-shadow: 0 3px 8px rgba(180, 40, 90, 0.15);
+    transition: border-radius 0.2s, transform 0.15s, background-color 0.2s;
+}
+
+.rail-item:hover, .rail-item.ativo {
+    border-radius: 18px;
+    background-color: #ff2e63;
+    color: #ffffff;
+    border-color: #ffffff;
+    transform: scale(1.05);
+}
+
+.rail-add-group {
+    color: #ff2e63;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.rail-user-btn {
+    background-color: #ffffff;
+    padding: 2px;
+}
+
+.rail-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    display: block;
+}
+
+.rail-online-dot {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 12px;
+    height: 12px;
+    background-color: #38d39f;
+    border: 2.5px solid #ffffff;
+    border-radius: 50%;
+}
+
+.rail-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background-color: #ff2e63;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rail-divider {
+    width: 34px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   COLUNA 2: SIDEBAR DE CANTINHOS E PERFIL
+   ========================================== */
+.channel-sidebar {
+    width: 265px;
+    background-color: #ffe8f0;
+    border-right: 2px solid #ffd1e1;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.server-header {
+    height: 52px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Fredoka", sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #d81b60;
+    background-color: #ffdce8;
+    border-bottom: 2px solid #ffc7db;
+}
+
+.badge-kitty-header {
+    font-size: 0.7rem;
+    background-color: #ffffff;
+    color: #ff2e63;
+    padding: 3px 8px;
+    border-radius: 12px;
+    border: 1px solid #ffb3cc;
+    font-weight: 700;
+}
+
+.search-container {
+    padding: 10px 12px;
+}
+
+.search-box {
+    background-color: #ffffff;
+    border: 1.5px solid #ffc2d6;
+    border-radius: 12px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.search-box:focus-within {
+    border-color: #ff2e63;
+}
+
+.search-icon {
+    font-size: 0.85rem;
+}
+
+#input-pesquisa {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #5c2a3a;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+#input-pesquisa::placeholder {
+    color: #b57b8e;
+}
+
+#btn-limpar-pesquisa {
+    background: none;
+    border: none;
+    color: #b57b8e;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.channels-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 10px;
+}
+
+.category-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 4px;
+}
+
+.category-title {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #b84a6f;
+    letter-spacing: 0.4px;
+    padding: 8px 6px 4px 6px;
+    user-select: none;
+}
+
+.btn-add-channel {
+    background: #ffffff;
+    border: 1px solid #ffb8d0;
+    color: #ff2e63;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 7px;
+    border-radius: 8px;
+}
+
+.btn-add-channel:hover {
+    color: #ffffff;
+    background-color: #ff2e63;
+}
+
+#lista-canais, #lista-usuarios {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.usuario-item {
+    padding: 8px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #7d3c52;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+
+.usuario-item:hover {
+    background-color: #ffd6e5;
+    color: #d81b60;
+}
+
+.usuario-item.ativo {
+    background-color: #ff528e;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(255, 82, 142, 0.25);
+}
+
+.hash, .grupo-icone {
+    font-size: 1rem;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.avatar-lista {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ffffff;
+    border: 1.5px solid #ffb3cc;
+}
+
+.status-dot-online {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 9px;
+    height: 9px;
+    background-color: #38d39f;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+
+.nome-lista {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge-nova {
+    margin-left: auto;
+    background-color: #ff2e63;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+}
+
+/* Rodapé de Login / Perfil */
+.user-panel {
+    background-color: #ffdce8;
+    border-top: 2px solid #ffc7db;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#btn-avatar {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid #ff528e;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    background-color: #ffffff;
+}
+
+#preview-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.avatar-edit-badge {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    font-size: 0.75rem;
+    background: #ffffff;
+    border-radius: 50%;
+    padding: 1px 3px;
+    border: 1px solid #ffb3cc;
+}
+
+.user-status-dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 11px;
+    height: 11px;
+    background-color: #b57b8e;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+
+.user-status-dot.online {
+    background-color: #38d39f;
+}
+
+.login-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 4px;
+}
+
+#auth-nome, #auth-senha {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1.5px solid #ffb8d0;
+    border-radius: 8px;
+    padding: 4px 8px;
+    color: #5c2a3a;
+    font-size: 0.82rem;
+    font-weight: 600;
+    outline: none;
+}
+
+#auth-nome:focus, #auth-senha:focus {
+    border-color: #ff2e63;
+}
+
+.auth-inline-row {
+    display: flex;
+    gap: 4px;
+}
+
+.auth-inline-row input {
+    flex: 1;
+    min-width: 0;
+}
+
+#btn-inline-entrar {
+    background-color: #ff2e63;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 0 8px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#btn-inline-entrar:hover {
+    background-color: #e01e50;
+}
+
+#btn-inline-cadastrar {
+    background-color: #ff7aa8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 0 8px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#btn-inline-cadastrar:hover {
+    background-color: #ff528e;
+}
+
+#nome:disabled {
+    background: transparent;
+    border-color: transparent;
+    padding: 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #b81d52;
+}
+
+.status-login-texto {
+    font-size: 0.68rem;
+    color: #9e4765;
+    font-weight: 600;
+}
+
+.status-login-texto.online {
+    color: #1e9e6d;
+}
+
+#btn-logout {
+    background: #ffffff;
+    border: 1px solid #ffb8d0;
+    color: #ff2e63;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px 7px;
+    border-radius: 8px;
+}
+
+#btn-logout:hover {
+    background-color: #ff2e63;
+    color: #ffffff;
+}
+
+/* ==========================================
+   COLUNA 3: ÁREA PRINCIPAL DO CHAT
+   ========================================== */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff7fa;
+    min-width: 0;
+}
+
+.chat-header {
+    height: 52px;
+    padding: 0 18px;
+    border-bottom: 2px solid #ffd6e5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+}
+
+.chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Fredoka", sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #d81b60;
+}
+
+.chat-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-header-tema {
+    background-color: #fff0f5;
+    border: 1.5px solid #ffb8d0;
+    color: #d81b60;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.btn-header-tema:hover {
+    background-color: #ff528e;
+    color: #ffffff;
+    border-color: #ff528e;
+}
+
+.avatar-header {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid #ff7aa8;
+}
+
+.header-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    background-color: #ffe4ec;
+    color: #d81b60;
+    padding: 2px 10px;
+    border-radius: 12px;
+}
+
+.header-hint {
+    font-size: 0.8rem;
+    color: #b57b8e;
+    font-weight: 600;
+}
+
+/* Faixa de frases temáticas de gatinhos brancos */
+.kitty-quotes-bar {
+    background: linear-gradient(90deg, #ffe4ec 0%, #fff0f6 50%, #ffe4ec 100%);
+    border-bottom: 1.5px solid #ffc7db;
+    padding: 7px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.84rem;
+}
+
+.quote-badge {
+    background-color: #ffffff;
+    color: #ff2e63;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    border: 1px solid #ffb3cc;
+    white-space: nowrap;
+}
+
+.quote-text {
+    flex: 1;
+    color: #7d3c52;
+    font-weight: 600;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quote-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+#btn-usar-frase, #btn-nova-frase {
+    background-color: #ffffff;
+    border: 1px solid #ffb3cc;
+    color: #d81b60;
+    border-radius: 10px;
+    padding: 3px 9px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#btn-usar-frase:hover, #btn-nova-frase:hover {
+    background-color: #ff2e63;
+    color: #ffffff;
+}
+
+/* ==========================================
+   PAPÉIS DE PAREDE (WALLPAPERS) DO CHAT
+   ========================================== */
+#mensagens {
+    list-style: none;
+    flex: 1;
+    padding: 16px 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+/* 1. Laços da Hello Kitty */
+.wp-lacos {
+    background-color: #fff6f9;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cg fill='%23ff85a2' fill-opacity='0.18'%3E%3Cellipse cx='20' cy='25' rx='8' ry='6'/%3E%3Cellipse cx='34' cy='25' rx='8' ry='6'/%3E%3Ccircle cx='27' cy='25' r='4'/%3E%3Cellipse cx='65' cy='68' rx='8' ry='6'/%3E%3Cellipse cx='79' cy='68' rx='8' ry='6'/%3E%3Ccircle cx='72' cy='68' r='4'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 2. Gatinhos Brancos */
+.wp-gatinhos {
+    background-color: #fdf2f6;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 0 110 110'%3E%3Cg fill='%23ffffff' stroke='%23ffb3cc' stroke-width='2'%3E%3Cpolygon points='25,35 28,20 40,30'/%3E%3Cpolygon points='65,35 62,20 50,30'/%3E%3Cellipse cx='45' cy='45' rx='22' ry='17'/%3E%3Ccircle cx='37' cy='44' r='2' fill='%23ff7aa8' stroke='none'/%3E%3Ccircle cx='53' cy='44' r='2' fill='%23ff7aa8' stroke='none'/%3E%3Cellipse cx='45' cy='49' rx='3' ry='2' fill='%23ffd166' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 3. Nuvens do Cinnamoroll */
+.wp-cinnamoroll {
+    background-color: #eef8ff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='100' viewBox='0 0 120 100'%3E%3Cg fill='%23ffffff' stroke='%23bce0fd' stroke-width='2'%3E%3Cpath d='M25,45 a10,10 0 0,1 10,-10 a14,14 0 0,1 26,0 a10,10 0 0,1 10,10 z'/%3E%3Cpath d='M65,85 a8,8 0 0,1 8,-8 a12,12 0 0,1 22,0 a8,8 0 0,1 8,8 z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 4. Noite da Kuromi */
+.wp-kuromi {
+    background-color: #f4edff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23b388ff' fill-opacity='0.2'%3E%3Cpolygon points='25,10 28,20 38,20 30,26 33,36 25,30 17,36 20,26 12,20 22,20'/%3E%3Ccircle cx='75' cy='70' r='8'/%3E%3Ccircle cx='79' cy='67' r='7' fill='%23f4edff'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 5. Morangos Doces */
+.wp-morango {
+    background-color: #fff8f0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cg fill='%23ff4d6d' fill-opacity='0.16'%3E%3Cpath d='M25,25 C15,25 15,42 25,48 C35,42 35,25 25,25 Z'/%3E%3Cpath d='M70,65 C60,65 60,82 70,88 C80,82 80,65 70,65 Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 6. Poá Clássico */
+.wp-poa {
+    background-color: #ffdce8;
+    background-image: radial-gradient(#ffffff 22%, transparent 23%), radial-gradient(#ffffff 22%, transparent 23%);
+    background-size: 44px 44px;
+    background-position: 0 0, 22px 22px;
+}
+
+/* Mensagens Estilo Balão Kawaii */
+.discord-msg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0 18px;
+    padding: 10px 14px;
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1.5px solid #ffd1e1;
+    border-radius: 18px;
+    box-shadow: 0 2px 6px rgba(216, 27, 96, 0.06);
+    transition: transform 0.1s;
+}
+
+.discord-msg-row:hover {
+    background-color: #ffffff;
+}
+
+.discord-msg-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: #fff0f5;
+    border: 2px solid #ff85a2;
+}
+
+.discord-msg-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.discord-msg-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.discord-msg-author {
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #d81b60;
+}
+
+.discord-msg-author.meu-autor {
+    color: #ff2e63;
+}
+
+.tag-personagem-msg {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background-color: #fff0f5;
+    color: #b84a6f;
+    border: 1px solid #ffc2d6;
+    padding: 1px 8px;
+    border-radius: 10px;
+}
+
+.discord-msg-time {
+    font-size: 0.72rem;
+    color: #b57b8e;
+    font-weight: 600;
+}
+
+.discord-msg-text {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: #4a202e;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+/* Mensagem de sistema */
+.system-msg-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 2px 24px;
+    padding: 6px 14px;
+    background-color: rgba(255, 228, 236, 0.92);
+    border: 1px dashed #ff85a2;
+    border-radius: 14px;
+    font-size: 0.84rem;
+    color: #b81d52;
+    font-weight: 700;
+}
+
+.system-msg-time {
+    font-size: 0.7rem;
+    color: #b57b8e;
+}
+
+.imagem-enviada {
+    max-width: 340px;
+    max-height: 260px;
+    border-radius: 14px;
+    border: 2px solid #ffc2d6;
+    display: block;
+    margin-top: 6px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Pré-visualização de imagem */
+.preview-container {
+    display: none;
+    margin: 0 16px 8px 16px;
+    padding: 10px 14px;
+    background-color: #ffe4ec;
+    border: 1.5px solid #ff85a2;
+    border-radius: 14px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.preview-container.ativo {
+    display: flex;
+}
+
+.preview-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #b81d52;
+}
+
+#preview-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#btn-cancelar-img {
+    background: #ff2e63;
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Barra de Input Inferior */
+.chat-input-wrapper {
+    padding: 8px 16px 14px 16px;
+    background-color: #ffffff;
+    border-top: 2px solid #ffd6e5;
+}
+
+#form-chat {
+    background-color: #fff5f8;
+    border: 2px solid #ffb8d0;
+    border-radius: 24px;
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#form-chat:focus-within {
+    border-color: #ff2e63;
+    box-shadow: 0 0 0 3px rgba(255, 46, 99, 0.12);
+}
+
+.btn-plus {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background-color: #ff528e;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.btn-plus:hover {
+    background-color: #ff2e63;
+}
+
+#mensagem {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #5c2a3a;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 6px 4px;
+}
+
+#mensagem::placeholder {
+    color: #b57b8e;
+}
+
+.btn-icone, .btn-enviar {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: #ff528e;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s;
+}
+
+.btn-icone:hover, .btn-enviar:hover {
+    transform: scale(1.15);
+    color: #ff2e63;
+}
+
+/* Gaveta de Emojis */
+.emoji-drawer {
+    display: none;
+    background-color: #ffe8f0;
+    border-top: 2px solid #ffc7db;
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 10px;
+    height: 200px;
+}
+
+.emoji-drawer.ativo {
+    display: flex;
+}
+
+.emoji-drawer-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.emoji-tab {
+    background-color: #ff528e;
+    color: #ffffff;
+    padding: 5px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+#busca-emoji {
+    flex: 1;
+    background-color: #ffffff;
+    border: 1.5px solid #ffb8d0;
+    border-radius: 12px;
+    padding: 6px 12px;
+    color: #5c2a3a;
+    font-size: 0.85rem;
+    font-weight: 600;
+    outline: none;
+}
+
+.emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 6px;
+    overflow-y: auto;
+}
+
+.emoji-item {
+    background: #ffffff;
+    border: 1px solid #ffd1e1;
+    font-size: 1.45rem;
+    padding: 4px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.emoji-item:hover {
+    background-color: #ffd6e5;
+    transform: scale(1.08);
+}
+
+/* Gravação de Áudio */
+.gravacao-container {
+    display: none;
+    margin: 0 16px 8px 16px;
+    padding: 10px 14px;
+    background-color: #ffe4ec;
+    border: 2px solid #ff2e63;
+    border-radius: 14px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gravacao-container.ativo {
+    display: flex;
+}
+
+.gravacao-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #b81d52;
+}
+
+.gravacao-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ff2e63;
+    border-radius: 50%;
+    animation: pulsarGravacao 1s infinite;
+}
+
+@keyframes pulsarGravacao {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+.gravacao-acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#btn-cancelar-audio {
+    background-color: #ffffff;
+    color: #7d3c52;
+    border: 1px solid #ffb3cc;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#btn-enviar-audio {
+    background-color: #ff2e63;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.audio-enviado {
+    margin-top: 6px;
+    height: 36px;
+    max-width: 300px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* ==========================================
+   MODAIS (SALA, PERSONAGEM E WALLPAPER)
+   ========================================== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(130, 30, 68, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.modal-overlay.ativo {
+    display: flex;
+}
+
+.modal-box {
+    background-color: #ffffff;
+    border: 3px solid #ff85a2;
+    border-radius: 22px;
+    width: 100%;
+    max-width: 430px;
+    padding: 24px;
+    box-shadow: 0 12px 32px rgba(216, 27, 96, 0.25);
+    color: #5c2a3a;
+}
+
+.modal-box.modal-largo {
+    max-width: 580px;
+}
+
+.modal-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-family: "Fredoka", sans-serif;
+    color: #d81b60;
+}
+
+.modal-desc {
+    font-size: 0.86rem;
+    color: #8c4a60;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.btn-fechar-modal {
+    background: #fff0f5;
+    border: 1px solid #ffb8d0;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    color: #d81b60;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.personagens-grid, .wallpapers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.personagem-card, .wp-card {
+    background-color: #fff7fa;
+    border: 2px solid #ffd1e1;
+    border-radius: 16px;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.personagem-card:hover, .wp-card:hover {
+    border-color: #ff7aa8;
+    transform: translateY(-2px);
+}
+
+.personagem-card.selecionado, .wp-card.selecionado {
+    background-color: #ffe4ec;
+    border-color: #ff2e63;
+    box-shadow: 0 4px 12px rgba(255, 46, 99, 0.2);
+}
+
+.personagem-card img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid #ff85a2;
+    background: #ffffff;
+}
+
+.personagem-card strong, .wp-card strong {
+    font-size: 0.88rem;
+    color: #d81b60;
+}
+
+.personagem-card span, .wp-card span {
+    font-size: 0.72rem;
+    color: #8c4a60;
+    font-weight: 600;
+}
+
+.wp-preview {
+    width: 100%;
+    height: 46px;
+    border-radius: 10px;
+    border: 1.5px solid #ffb8d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #b84a6f;
+}
+
+.form-group input[type="text"] {
+    background-color: #fff5f8;
+    border: 1.5px solid #ffb8d0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: #5c2a3a;
+    font-size: 0.92rem;
+    font-weight: 600;
+    outline: none;
+}
+
+.tipo-sala-opcoes {
+    display: flex;
+    gap: 10px;
+}
+
+.radio-card {
+    flex: 1;
+    background-color: #fff5f8;
+    border: 1.5px solid #ffd1e1;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #7d3c52;
+}
+
+.radio-card:has(input:checked) {
+    border-color: #ff2e63;
+    background-color: #ffe4ec;
+    color: #d81b60;
+}
+
+.auth-erro {
+    color: #ff2e63;
+    font-size: 0.82rem;
+    font-weight: 700;
+    min-height: 18px;
+    margin-bottom: 8px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: #ff2e63;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #e01e50;
+}
+
+.btn-secundario {
+    background-color: #fff0f5;
+    color: #d81b60;
+    border: 1px solid #ffb8d0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff0f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff9ebb;
+    border-radius: 6px;
+}
+
+@media (max-width: 720px) {
+    .server-rail { width: 58px; }
+    .channel-sidebar { width: 215px; }
+    .personagens-grid, .wallpapers-grid { grid-template-columns: repeat(2, 1fr); }
+}

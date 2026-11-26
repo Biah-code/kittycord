@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KittyCord 🎀 Chat da Hello Kitty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- MODAL 1: CRIAR SALA / CLUBINHO -->
+    <div class="modal-overlay" id="modal-criar-sala">
+        <div class="modal-box">
+            <div class="modal-header-row">
+                <h3>🎀 Criar Cantinho ou Clubinho</h3>
+                <button type="button" class="btn-fechar-modal" id="btn-fechar-modal-sala">✕</button>
+            </div>
+            <p class="modal-desc">Crie um espaço fofo para conversar sobre gatinhos brancos, laços e amizade!</p>
+
+            <form id="form-criar-sala">
+                <div class="form-group">
+                    <label>Tipo de Cantinho</label>
+                    <div class="tipo-sala-opcoes">
+                        <label class="radio-card">
+                            <input type="radio" name="tipo-sala" value="grupo" checked>
+                            <span>🐾 Clubinho</span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="tipo-sala" value="sala">
+                            <span>🎀 Sala Pública</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-nome-sala">Nome do cantinho</label>
+                    <input type="text" id="input-nome-sala" placeholder="ex: gatinhos-brancos, torta-de-maca, lacos" required autocomplete="off">
+                </div>
+
+                <p class="auth-erro" id="sala-erro"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btn-cancelar-sala">Cancelar</button>
+                    <button type="submit" class="btn-primary">Criar com Amor 🎀</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ESCOLHER PERSONAGEM HELLO KITTY & AMIGOS -->
+    <div class="modal-overlay" id="modal-personagem">
+        <div class="modal-box modal-largo">
+            <div class="modal-header-row">
+                <h3>🐱 Escolha seu Personagem</h3>
+                <button type="button" class="btn-fechar-modal" id="btn-fechar-modal-personagem">✕</button>
+            </div>
+            <p class="modal-desc">Selecione um personagem da turma da Hello Kitty ou envie sua própria foto fofa!</p>
+
+            <div class="personagens-grid" id="grid-personagens"></div>
+
+            <div class="modal-actions" style="justify-content: space-between; margin-top: 16px;">
+                <button type="button" class="btn-secundario" id="btn-upload-foto-custom">📷 Usar foto do computador</button>
+                <button type="button" class="btn-primary" id="btn-confirmar-personagem">Pronto! 🎀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: ESCOLHER FUNDO DA CONVERSA (WALLPAPER) -->
+    <div class="modal-overlay" id="modal-wallpaper">
+        <div class="modal-box modal-largo">
+            <div class="modal-header-row">
+                <h3>🖼️ Fundo da Conversa (Wallpaper)</h3>
+                <button type="button" class="btn-fechar-modal" id="btn-fechar-modal-wallpaper">✕</button>
+            </div>
+            <p class="modal-desc">Personalize o papel de parede do seu chat com temas da Hello Kitty e gatinhos brancos:</p>
+
+            <div class="wallpapers-grid" id="grid-wallpapers"></div>
+
+            <div class="modal-actions" style="margin-top: 16px;">
+                <button type="button" class="btn-primary" id="btn-fechar-wallpaper-ok">Salvar Fundo 🎀</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="discord-app">
+        <!-- Coluna 1: Barra lateral estilo Sanrio -->
+        <nav class="server-rail">
+            <div class="rail-item ativo" data-atalho="Geral" title="Casinha da Hello Kitty">🎀</div>
+            <div class="rail-item rail-add-group" id="rail-criar-grupo" title="Criar novo clubinho">+</div>
+            <div class="rail-divider"></div>
+            
+            <div id="rail-usuarios" class="rail-usuarios-lista"></div>
+
+            <div class="rail-bottom">
+                <div class="rail-divider"></div>
+                <div class="rail-item" id="rail-atalho-wallpaper" title="Trocar fundo da conversa">🖼️</div>
+                <div class="rail-item" id="rail-atalho-avatar" title="Escolher personagem">🐱</div>
+                <div class="rail-item" id="rail-atalho-emoji" title="Abrir emojis fofos">🍓</div>
+            </div>
+        </nav>
+
+        <!-- Coluna 2: Painel de canais, gatinhos online e perfil -->
+        <aside class="channel-sidebar">
+            <div class="server-header">
+                <span>🎀 KittyCord</span>
+                <span class="badge-kitty-header">White Cat</span>
+            </div>
+
+            <!-- Barra de pesquisa -->
+            <div class="search-container">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="input-pesquisa" placeholder="Procurar miados..." autocomplete="off">
+                    <button type="button" id="btn-limpar-pesquisa" style="display: none;">✕</button>
+                </div>
+            </div>
+
+            <!-- Lista de salas e gatinhos online -->
+            <div class="channels-scroll">
+                <div class="category-header-row">
+                    <span class="category-title">🎀 CANTINHOS DA KITTY</span>
+                    <button type="button" class="btn-add-channel" id="btn-abrir-modal-sala" title="Criar clubinho">+</button>
+                </div>
+                <ul id="lista-canais"></ul>
+
+                <div class="category-title" style="margin-top: 16px;">🐾 GATINHOS ONLINE</div>
+                <ul id="lista-usuarios"></ul>
+            </div>
+
+            <!-- Login / Perfil fixo no canto inferior -->
+            <div class="user-panel">
+                <button type="button" id="btn-avatar" title="Clique para escolher seu personagem!">
+                    <img id="preview-avatar" src="" alt="Personagem">
+                    <span class="user-status-dot" id="dot-meu-status"></span>
+                    <span class="avatar-edit-badge">🎀</span>
+                </button>
+                <input type="file" id="input-avatar" accept="image/*" style="display: none;">
+
+                <!-- Formulário de Login/Cadastro -->
+                <div class="login-info" id="area-login-inline">
+                    <input type="text" id="auth-nome" placeholder="Seu apelido fofo..." autocomplete="off">
+                    <div class="auth-inline-row">
+                        <input type="password" id="auth-senha" placeholder="Senha...">
+                        <button type="button" id="btn-inline-entrar" title="Entrar">Entrar</button>
+                        <button type="button" id="btn-inline-cadastrar" title="Criar conta">Criar</button>
+                    </div>
+                    <span id="status-login" class="status-login-texto">Clique na fotinho para escolher personagem!</span>
+                </div>
+
+                <!-- Exibido após autenticado -->
+                <div class="login-info" id="area-perfil-logado" style="display: none;">
+                    <input type="text" id="nome" disabled autocomplete="off">
+                    <span class="status-login-texto online" id="texto-personagem-ativo">🎀 Hello Kitty • Online</span>
+                </div>
+
+                <button type="button" id="btn-logout" title="Sair da casinha" style="display: none;">🚪</button>
+            </div>
+        </aside>
+
+        <!-- Coluna 3: Área principal do chat -->
+        <main class="chat-main">
+            <header class="chat-header">
+                <div class="chat-header-left">
+                    <span class="header-hash" id="header-simbolo">🎀</span>
+                    <img id="avatar-conversa" class="avatar-header" src="" alt="" style="display: none;">
+                    <span id="titulo-conversa">casinha-da-kitty</span>
+                    <span id="badge-tipo-conversa" class="header-badge" style="display: none;">Clubinho</span>
+                </div>
+                <div class="chat-header-right">
+                    <button type="button" class="btn-header-tema" id="btn-abrir-personagem" title="Trocar Personagem">
+                        🐱 Personagem
+                    </button>
+                    <button type="button" class="btn-header-tema" id="btn-abrir-wallpaper" title="Trocar Papel de Parede">
+                        🖼️ Fundo
+                    </button>
+                    <span class="header-hint" id="contador-mensagens">0 miados</span>
+                </div>
+            </header>
+
+            <!-- Faixa de textos temáticos de gatinhos brancos -->
+            <div class="kitty-quotes-bar" id="kitty-quotes-bar">
+                <span class="quote-badge">🐾 Gatinho Branco:</span>
+                <span class="quote-text" id="frase-gatinho-atual">"Miau! Que tal uma xícara de leite morno e torta de maçã hoje? 🍎🥛"</span>
+                <div class="quote-actions">
+                    <button type="button" id="btn-usar-frase" title="Enviar esta frase no chat">Enviar 💌</button>
+                    <button type="button" id="btn-nova-frase" title="Outra frase de gatinho branco">🔄</button>
+                </div>
+            </div>
+
+            <!-- Feed de mensagens com wallpaper dinâmico -->
+            <ul id="mensagens" class="wp-lacos"></ul>
+
+            <!-- Pré-visualização de imagem anexada -->
+            <div class="preview-container" id="preview-container">
+                <div class="preview-info">
+                    <img id="preview-img" src="" alt="Prévia">
+                    <span>🎀 Imagem fofa pronta para envio!</span>
+                </div>
+                <button type="button" id="btn-cancelar-img" title="Remover imagem">✕</button>
+            </div>
+
+            <!-- Barra de status de gravação de áudio -->
+            <div class="gravacao-container" id="gravacao-container">
+                <div class="gravacao-info">
+                    <span class="gravacao-dot"></span>
+                    <span>Gravando miadinho... <strong id="tempo-gravacao">00:00</strong></span>
+                </div>
+                <div class="gravacao-acoes">
+                    <button type="button" id="btn-cancelar-audio">Cancelar</button>
+                    <button type="button" id="btn-enviar-audio">Enviar Áudio 🎀</button>
+                </div>
+            </div>
+
+            <!-- Barra de digitação -->
+            <div class="chat-input-wrapper">
+                <form id="form-chat">
+                    <button type="button" class="btn-plus" id="btn-imagem" title="Anexar imagem">+</button>
+                    <input type="file" id="input-imagem" accept="image/*" style="display: none;">
+
+                    <input type="text" id="mensagem" placeholder="Faça login no cantinho esquerdo para miar no chat... 🐾" autocomplete="off">
+
+                    <button type="button" class="btn-icone" id="btn-frase-rapida" title="Inserir frase temática de gatinho branco">🐾</button>
+                    <button type="button" class="btn-icone" id="btn-gravar-audio" title="Gravar áudio">🎤</button>
+                    <button type="button" class="btn-icone" id="btn-emoji" title="Emojis kawaii">🎀</button>
+                    <button type="submit" class="btn-enviar" title="Enviar">➤</button>
+                </form>
+            </div>
+
+            <!-- Gaveta inferior de Emojis -->
+            <div class="emoji-drawer" id="emoji-picker">
+                <div class="emoji-drawer-header">
+                    <span class="emoji-tab ativo">🎀 Emojis &amp; Gatinhos</span>
+                    <input type="text" id="busca-emoji" placeholder="Buscar emoji fofo..." autocomplete="off">
+                </div>
+                <div class="emoji-grid" id="emoji-grid"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
